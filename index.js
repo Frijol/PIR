@@ -5,27 +5,37 @@ var EventEmitter = require('events').EventEmitter;
 // Constructor function
 function PIR (hardware, callback) {
   var self = this;
-  
+
   // Check to ensure proper hardware has been passed in
   if (typeof hardware.pin != 'number') {
     // Pin not specified
     var error = new Error("Specify a pin, e.g. tessel.port['GPIO'].pin['G3']");
     self.emit('error', error);
-    return error;
-  } else if (! hardware.pin in [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 34, 35, 36, 37, 38, 39]) {
+    if(callback) {
+      callback(error);
+    }
+  } else if ([16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 34, 35, 36, 37, 38, 39].indexOf(hardware.pin) < 0) {
     // Not a digital pin
-    var error = new Error('Specified pin is not a digital pin.');
+    var error = new Error('Specified pin is not a digital pin: ' + hardware.pin);
     self.emit('error', error);
+    if(callback) {
+      callback(error);
+    }
   }
   
+  // Set hardware as a property
   self.hardware = hardware; // Hardware should be a specific pin for PIR
   
+  // Begin listening for events
   self.listening = true;
   
-  self.emit('ready',  self);
-  if(callback) {
-    callback(null, self);
-  }
+  // Emit the ready event
+  setImmediate(function emitReady() {
+    self.emit('ready', self);
+    if(callback) {
+      callback(null, self);
+    }
+  });
 }
 
 // Inherit event emission
