@@ -18,6 +18,10 @@
     "Node",
     "Tessel"
   ],
+  "hardware": {
+    "./examples": false,
+    "./test": false
+  },
   "author": "Kelsey Breseman",
   "license": "Apache 2.0",
   "bugs": {

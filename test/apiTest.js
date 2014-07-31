@@ -12,5 +12,6 @@ var pir;
 test.count(1);
 
 async.series([
+  // Test connecting
   
   ]);
