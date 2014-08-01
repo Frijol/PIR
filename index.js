@@ -27,7 +27,17 @@ function PIR (hardware, callback) {
   self.hardware = hardware; // Hardware should be a specific pin for PIR
   
   // Begin listening for events
-  self.listening = true;
+  self.hardware.on('rise', function (time) {
+    self.emit('movement', time);
+  });
+  
+  self.hardware.on('fall', function (time) {
+    self.emit('stillness', time);
+  });
+  
+  self.hardware.on('change', function (time, type) {
+    self.emit('change', time, type);
+  });
   
   // Emit the ready event
   setImmediate(function emitReady() {
@@ -42,38 +52,6 @@ function PIR (hardware, callback) {
 util.inherits(PIR, EventEmitter);
 
 // Functions
-// Enable re-enables event emission after a disable call.
-PIR.prototype.enable = function (callback) {
-  var self = this;
-  self.listening = true;
-  
-  while(self.listening) {
-    self.hardware.on('rise', function (time) {
-      self.emit('movement', time);
-    });
-    
-    self.hardware.on('fall', function (time) {
-      self.emit('stillness', time);
-    });
-    
-    self.hardware.on('change', function (time, type) {
-      self.emit('change', time, type);
-    });
-  }
-  
-  if(callback) {
-    callback();
-  }
-};
-
-// Disable mutes event emission
-PIR.prototype.disable = function (callback) {
-  self.listening = false;
-  if(callback) {
-    callback();
-  }
-};
-
 // Read the state of the pin
 PIR.prototype.read = function (callback) {
   callback(this.hardware.read);
