@@ -54,27 +54,30 @@ pir.on('error', function (err) {
 
 ##Methods
 
-[#] pir.read([callback(data)])
+&#x20;<a href="#api-pir-read-callback-data" name="api-pir-read-callback-data">#</a> pir<b>.read</b>( [callback(data)] )  
 Reads the value of the pin: 1 for movement; 0 for stillness. Returns the value or outputs to callback.
 
 ##Events
 
-[#] pir.on('error', callback(error))
+&#x20;<a href="#api-pir-on-error-callback-error" name="api-pir-on-error-callback-error">#</a> pir<b>.on</b>( 'error', callback(error) )  
 Emitted on error connecting
 
-[#] pir.on('ready', callback(err, pir))
+&#x20;<a href="#api-pir-on-ready-callback-err-pir" name="api-pir-on-ready-callback-err-pir">#</a> pir<b>.on</b>( 'ready', callback(err, pir) )  
 Emitted when the pir object is first initialized
 
-[#] pir.on('movement', callback(time))
+&#x20;<a href="#api-pir-on-movement-callback-time" name="api-pir-on-movement-callback-time">#</a> pir<b>.on</b>( 'movement', callback(time) )  
 Emitted when movement is first detected.
 
-[#] pir.on('stillness', callback(time))
+&#x20;<a href="#api-pir-on-stillness-callback-time" name="api-pir-on-stillness-callback-time">#</a> pir<b>.on</b>( 'stillness', callback(time) )  
 Emitted at the onset of stillness.
 
-[#] pir.on('change', callback(time, value))
+&#x20;<a href="#api-pir-on-change-callback-time-value" name="api-pir-on-change-callback-time-value">#</a> pir<b>.on</b>( 'change', callback(time, value) )  
 Emitted whenever the state changes. `value` is the pin.read value after the change.
 
 ##Properties
 
-[#] pir.movement
+&#x20;<a href="#api-pir-movement" name="api-pir-movement">#</a> pir<b>.movement</b>  
 `true` while movement detected; `false` while no movement detected
+
+##Licensing
+Copyright Kelsey Breseman, Apache 2.0 Licensed.
