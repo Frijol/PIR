@@ -1,6 +1,6 @@
 {
   "name": "pir",
-  "version": "0.0.0",
+  "version": "0.0.5",
   "description": "Node library for PIR motion detector",
   "main": "examples/pir.js",
   "scripts": {
