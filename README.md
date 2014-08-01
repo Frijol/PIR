@@ -20,3 +20,61 @@ The PIR I used has three pins. Here's how you connect it to Tessel:
 * OUT, the signal pin, goes to any of Tessel's various digital (G) pins. Note that the signal works on a maximum of 3.3V.
 
 I've left the PIR sensor in the retriggering position ([H for the Adafruit one](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/testing-a-pir)), so the signal pin will be pulled high as long as the sensor detects movement.
+
+##Installation
+```sh
+npm install pir
+```
+
+##Example
+```js
+/*********************************************
+This basic PIR example emits events when
+a body is detected and when a body exits
+the field.
+*********************************************/
+
+var tessel = require('tessel');
+var pir = require('../').use(tessel.port['GPIO'].pin['G3']);
+
+pir.on('ready', function (pir) {
+  console.log('Ready and waiting...');
+  pir.on('movement', function (time) {
+    console.log('Something moved! Time ' + time);
+  });
+  pir.on('stillness', function (time) {
+    console.log('All is still. Time ' + time);
+  });
+});
+
+pir.on('error', function (err) {
+  console.log(err);
+});
+```
+
+##Methods
+
+[#] pir.read([callback(data)])
+Reads the value of the pin: 1 for movement; 0 for stillness. Returns the value or outputs to callback.
+
+##Events
+
+[#] pir.on('error', callback(error))
+Emitted on error connecting
+
+[#] pir.on('ready', callback(err, pir))
+Emitted when the pir object is first initialized
+
+[#] pir.on('movement', callback(time))
+Emitted when movement is first detected.
+
+[#] pir.on('stillness', callback(time))
+Emitted at the onset of stillness.
+
+[#] pir.on('change', callback(time, value))
+Emitted whenever the state changes. `value` is the pin.read value after the change.
+
+##Properties
+
+[#] pir.movement
+`true` while movement detected; `false` while no movement detected

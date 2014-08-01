@@ -23,16 +23,19 @@ function PIR (hardware, callback) {
     }
   }
   
-  // Set hardware as a property
+  // Set properties
   self.hardware = hardware; // Hardware should be a specific pin for PIR
+  self.movement = false; // Initialize as not moving
   
   // Begin listening for events
   self.hardware.on('rise', function (time) {
     self.emit('movement', time);
+    self.movement = true;
   });
   
   self.hardware.on('fall', function (time) {
     self.emit('stillness', time);
+    self.movement = false;
   });
   
   self.hardware.on('change', function (time, type) {
@@ -54,7 +57,10 @@ util.inherits(PIR, EventEmitter);
 // Functions
 // Read the state of the pin
 PIR.prototype.read = function (callback) {
-  callback(this.hardware.read);
+  if(callback) {
+    callback(this.hardware.read());
+  }
+  return this.hardware.read();
 };
 
 // Standard Tessel use function

@@ -2,9 +2,9 @@
   "name": "pir",
   "version": "0.0.0",
   "description": "Node library for PIR motion detector",
-  "main": "index.js",
+  "main": "examples/pir.js",
   "scripts": {
-    "test": "tinytap -e 'tessel run {} ${ACCEL_PORT}' test/*.js"
+    "test": "tessel run test/*.js"
   },
   "repository": {
     "type": "git",
