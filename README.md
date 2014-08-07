@@ -13,13 +13,23 @@ Adafruit has a lovely writeup on how PIRs work; I encourage you to read the deta
 * When a warm body enters the field, the sensor records a positive charge differential.
 * When a warm body leaves the field, the sensor records a negative charge differential.
 
+##Materials
+
+* [PIR motion detector](http://www.adafruit.com/products/189)
+* [Tessel](tessel.io)
+
+##Connecting
+
 The PIR I used has three pins. Here's how you connect it to Tessel:
 
 * +5V on the PIR goes to Vin on Tessel's GPIO bank (this pin is 5V when Tessel is powered over USB)
 * GND goes to any of the various GND pins on Tessel. There's one right next to Vin on the GPIO bank.
 * OUT, the signal pin, goes to any of Tessel's various digital (G) pins. Note that the signal works on a maximum of 3.3V.
 
+![](https://lh3.googleusercontent.com/-Zcmg7NPefAM/U-LafNQe2lI/AAAAAAAAJno/jlCWeBbDWxU/w882-h496-no/20140801_113753.jpg)
+
 I've left the PIR sensor in the retriggering position ([H for the Adafruit one](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/testing-a-pir)), so the signal pin will be pulled high as long as the sensor detects movement.
+
 
 ##Installation
 ```sh
