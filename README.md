@@ -1,4 +1,4 @@
-PIR
+PIR Motion Detector
 ===
 
 Node library for PIR sensor
