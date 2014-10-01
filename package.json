@@ -2,7 +2,7 @@
   "name": "pir",
   "version": "0.0.5",
   "description": "Node library for PIR motion detector",
-  "main": "examples/pir.js",
+  "main": "",
   "scripts": {
     "test": "tessel run test/*.js"
   },
