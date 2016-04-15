@@ -32,17 +32,13 @@ I've left the PIR sensor in the retriggering position ([H for the Adafruit one](
 
 ![](https://lh3.googleusercontent.com/-Zcmg7NPefAM/U-LafNQe2lI/AAAAAAAAJno/jlCWeBbDWxU/w882-h496-no/20140801_113753.jpg)
 
-In this image, the black wire is ground; the red wire is 5V; and the yellow wire is the signal pin.
-
-This is connected to `tessel.port['GPIO'].pin('G3')`.
+In this image, the black wire is ground; the red wire is 5V; and the yellow wire is the signal pin. This is connected to `tessel.port['GPIO'].pin('G3')`.
 
 ### Tessel 2 connection example
 
 ![](https://cloud.githubusercontent.com/assets/454690/14521494/dca4d360-0229-11e6-9cb1-c7b8e023b619.png)
 
-In this image, the black box represents a ground wire; the green box represents a wire to 5V; and the yellow box represents a signal wire.
-
-This is connected to `tessel.port['A'].pin[3]`.
+In this image, the black box represents a ground wire; the green box represents a wire to 5V; and the yellow box represents a signal wire. This is connected to `tessel.port['A'].pin[3]`.
 
 On Tessel 2, there is no header already attached to the 5V line, so you will need to solder it. I would recommend purchasing and soldering in a 3x1 .1" female header like [this one](https://www.pololu.com/product/1013) so that you can easily swap your Tessel between this project and others.
 
@@ -62,7 +58,7 @@ the field.
 *********************************************/
 
 var tessel = require('tessel');
-var pir = require('../').use(tessel.port['A'].pin[1]);
+var pir = require('../').use(tessel.port['A'].pin[3]);
 
 pir.on('ready', function (pir) {
   console.log('Ready and waiting...');
