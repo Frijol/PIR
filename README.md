@@ -24,7 +24,7 @@ The PIR I used has three pins. Here's how you connect it to Tessel:
 
 * +5V on the PIR goes to Vin on Tessel's GPIO bank (this pin is 5V when Tessel is powered over USB)
 * GND goes to any of the various GND pins on Tessel. There's one right next to Vin on the GPIO bank.
-* OUT, the signal pin, goes to any of Tessel's various digital (G) pins. Note that the signal works on a maximum of 3.3V.
+* OUT, the signal pin, goes to any of Tessel's digital pins which support interrupts. Note that the signal works on a maximum of 3.3V.
 
 I've left the PIR sensor in the retriggering position ([H for the Adafruit one](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/testing-a-pir)), so the signal pin will be pulled high as long as the sensor detects movement.
 
@@ -34,11 +34,15 @@ I've left the PIR sensor in the retriggering position ([H for the Adafruit one](
 
 In this image, the black wire is ground; the red wire is 5V; and the yellow wire is the signal pin. This is connected to `tessel.port['GPIO'].pin('G3')`.
 
+For the signal pin, you can use any digital pin (any pin labeled "G" and a number).
+
 ### Tessel 2 connection example
 
-![](https://cloud.githubusercontent.com/assets/454690/14521494/dca4d360-0229-11e6-9cb1-c7b8e023b619.png)
+![tessel](https://cloud.githubusercontent.com/assets/454690/14555274/edfa21ec-02f1-11e6-8d6e-2a3c764e50c8.png)
 
-In this image, the black box represents a ground wire; the green box represents a wire to 5V; and the yellow box represents a signal wire. This is connected to `tessel.port['A'].pin[3]`.
+In this image, the black box represents a ground wire; the green box represents a wire to 5V; and the yellow box represents a signal wire. This is connected to `tessel.port['A'].pin[2]`.
+
+For the signal pin, you can use any digital pin which supports interrupts: [pins 2, 5, 6, and 7 on either port  meet these qualifications](https://tessel.io/docs/hardwareAPI#ports-and-pins).
 
 On Tessel 2, there is no header already attached to the 5V line, so you will need to solder it. I would recommend purchasing and soldering in a 3x1 .1" female header like [this one](https://www.pololu.com/product/1013) so that you can easily swap your Tessel between this project and others.
 
@@ -58,7 +62,7 @@ the field.
 *********************************************/
 
 var tessel = require('tessel');
-var pir = require('../').use(tessel.port['A'].pin[3]);
+var pir = require('../').use(tessel.port['A'].pin[2]);
 
 pir.on('ready', function (pir) {
   console.log('Ready and waiting...');

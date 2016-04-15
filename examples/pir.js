@@ -5,7 +5,7 @@ the field.
 *********************************************/
 
 var tessel = require('tessel');
-var pir = require('../').use(tessel.port['A'].pin[3]);
+var pir = require('../').use(tessel.port['A'].pin[2]);
 
 pir.on('ready', function (pir) {
   console.log('Ready and waiting...');
