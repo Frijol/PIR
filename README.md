@@ -49,7 +49,7 @@ var pir = require('pir').use(tessel.ports.A.pin[2]);
 pir.on('ready', function (pir) {
   console.log('Ready and waiting...');
 
-  pir.on('change', function (time) {
+  pir.on('change', function () {
     console.log('Current state', pir.state);
   })
 
