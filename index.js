@@ -9,20 +9,13 @@ function PIR (hardware, callback) {
   // Set properties
   self.hardware = hardware; // Hardware should be a specific pin for PIR
   self.movement = false; // Initialize as not moving
+  self.state = 'stillness'; // Initialize as still;
 
-  // Begin listening for events
-  self.hardware.on('rise', function (time) {
-    self.emit('movement', time);
-    self.movement = true;
-  });
+  self.hardware.on('change', function () {
+    self.movement = !self.movement; // toggle current value
+    self.state = self.movement ? 'movement' : 'stillness'; // update state
 
-  self.hardware.on('fall', function (time) {
-    self.emit('stillness', time);
-    self.movement = false;
-  });
-
-  self.hardware.on('change', function (time, type) {
-    self.emit('change', time, type);
+    self.emit('change');
   });
 
   // Emit the ready event
