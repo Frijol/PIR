@@ -1,56 +1,52 @@
-// Requires
-var util = require('util');
-var EventEmitter = require('events').EventEmitter;
+"use strict";
 
-// Constructor function
-function PIR (hardware, callback) {
-  var self = this;
+const Emitter = require('events').EventEmitter;
 
-  // Set properties
-  self.hardware = hardware; // Hardware should be a specific pin for PIR
-  self.movement = false; // Initialize as not moving
+class PIR extends Emitter {
+  constructor(hardware, callback) {
+    super();
 
-  // Begin listening for events
-  self.hardware.on('rise', function (time) {
-    self.emit('movement', time);
-    self.movement = true;
-  });
+    // Hardware should be a specific pin for PIR
+    this.hardware = hardware;
+    // Initialize as not moving
+    this.movement = false;
 
-  self.hardware.on('fall', function (time) {
-    self.emit('stillness', time);
-    self.movement = false;
-  });
+    // Begin listening for events
+    this.hardware.on('rise', () => {
+      const now = Date.now();
+      this.movement = true;
+      this.emit('movement', now);
+      this.emit('movement:start', now);
+    });
 
-  self.hardware.on('change', function (time, type) {
-    self.emit('change', time, type);
-  });
+    this.hardware.on('fall', () => {
+      const now = Date.now();
+      this.movement = false;
+      this.emit('stillness', now);
+      this.emit('movement:end', now);
+    });
 
-  // Emit the ready event
-  setImmediate(function emitReady() {
-    self.emit('ready', self);
-    if(callback) {
-      callback(null, self);
-    }
-  });
-}
+    this.hardware.on('change', (state) => {
+      const now = Date.now();
+      this.movement = !!state;
+      this.emit('change', now, state);
+    });
 
-// Inherit event emission
-util.inherits(PIR, EventEmitter);
-
-// Functions
-// Read the state of the pin
-PIR.prototype.read = function (callback) {
-  if(callback) {
-    callback(this.hardware.read());
+    setImmediate(() => {
+      this.emit('ready', this);
+      if (callback) {
+        callback(null, this);
+      }
+    });
   }
-  return this.hardware.read();
-};
 
-// Standard Tessel use function
-function use (hardware, callback) {
-  return new PIR(hardware, callback);
+  static get PIR() {
+    return PIR;
+  }
+
+  static use(hardware, callback) {
+    return new PIR(hardware, callback);
+  }
 }
 
-// Exports
-exports.PIR = PIR;
-exports.use = use;
+module.exports = PIR;
