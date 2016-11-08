@@ -4,7 +4,7 @@
   "description": "Node library for PIR motion detector",
   "main": "",
   "scripts": {
-    "test": "t2 run test/*.js"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
@@ -18,22 +18,13 @@
     "Node",
     "Tessel"
   ],
-  "hardware": {
-    "./examples": false,
-    "./test": false
-  },
   "author": "Kelsey Breseman",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Frijol/PIR/issues"
   },
   "homepage": "https://github.com/Frijol/PIR",
-  "directories": {
-    "example": "examples",
-    "test": "test"
-  },
   "devDependencies": {
-    "async": "^0.9.0",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-jshint": "^1.0.0",
