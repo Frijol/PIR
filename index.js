@@ -26,7 +26,7 @@ class PIR extends Emitter {
       this.emit('movement:end', now);
     });
 
-    this.hardware.on('change', (state) => {
+    this.hardware.on('change', state => {
       const now = Date.now();
       this.movement = !!state;
       this.emit('change', now, state);
