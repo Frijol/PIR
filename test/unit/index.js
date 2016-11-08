@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const EventEmitter = require('events').EventEmitter;
 
@@ -134,4 +134,3 @@ exports['use'] = {
     test.done();
   },
 };
-
