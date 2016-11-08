@@ -1,11 +1,13 @@
-var EventEmitter = require('events').EventEmitter;
+"use strict";
 
-var sinon = require('sinon');
-var exported = require('../../');
+const EventEmitter = require('events').EventEmitter;
+
+const sinon = require('sinon');
+const exported = require('../../');
 
 
-var sandbox = sinon.sandbox.create();
-var hardware = new EventEmitter();
+const sandbox = sinon.sandbox.create();
+const hardware = new EventEmitter();
 
 exports['PIR'] = {
   setUp(done) {
@@ -126,7 +128,7 @@ exports['use'] = {
   returnsPIRInstance(test) {
     test.expect(1);
 
-    var pir = exported.use(hardware, this.spy);
+    const pir = exported.use(hardware, this.spy);
 
     test.equal(pir instanceof exported.PIR, true);
     test.done();
