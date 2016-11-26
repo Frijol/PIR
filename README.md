@@ -13,12 +13,12 @@ Adafruit has a lovely writeup on how PIRs work; I encourage you to read the deta
 * When a warm body enters the field, the sensor records a positive charge differential.
 * When a warm body leaves the field, the sensor records a negative charge differential.
 
-##Materials
+## Materials
 
 * [PIR motion detector](http://www.adafruit.com/products/189)
 * [Tessel](tessel.io)
 
-##Connecting
+## Connecting
 
 The PIR I used has three pins. Here's how you connect it to Tessel:
 
@@ -31,12 +31,12 @@ The PIR I used has three pins. Here's how you connect it to Tessel:
 I've left the PIR sensor in the retriggering position ([H for the Adafruit one](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/testing-a-pir)), so the signal pin will be pulled high as long as the sensor detects movement.
 
 
-##Installation
+## Installation
 ```sh
 npm install pir
 ```
 
-##Example
+## Example
 ```js
 /*********************************************
 This basic PIR example emits events when
@@ -62,12 +62,12 @@ pir.on('error', function (err) {
 });
 ```
 
-##Methods
+## Methods
 
 &#x20;<a href="#api-pir-read-callback-data" name="api-pir-read-callback-data">#</a> pir<b>.read</b>( [callback(data)] )  
 Reads the value of the pin: 1 for movement; 0 for stillness. Returns the value or outputs to callback.
 
-##Events
+## Events
 
 &#x20;<a href="#api-pir-on-error-callback-error" name="api-pir-on-error-callback-error">#</a> pir<b>.on</b>( 'error', callback(error) )  
 Emitted on error connecting
@@ -84,10 +84,10 @@ Emitted at the onset of stillness.
 &#x20;<a href="#api-pir-on-change-callback-time-value" name="api-pir-on-change-callback-time-value">#</a> pir<b>.on</b>( 'change', callback(time, value) )  
 Emitted whenever the state changes. `value` is the pin.read value after the change.
 
-##Properties
+## Properties
 
 &#x20;<a href="#api-pir-movement" name="api-pir-movement">#</a> pir<b>.movement</b>  
 `true` while movement detected; `false` while no movement detected
 
-##Licensing
+## Licensing
 Copyright Kelsey Breseman, Apache 2.0 Licensed.
