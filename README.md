@@ -3,6 +3,8 @@ PIR Motion Detector
 
 Node library for PIR sensor
 
+**For Tessel 1, use version 0.1.0 of this package.**
+
 I used [this one](http://www.adafruit.com/products/189) from Adafruit.
 
 Adafruit has a lovely writeup on how PIRs work; I encourage you to read the details [here](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/how-pirs-work). Here are some of the key pieces of information:
@@ -22,11 +24,9 @@ Adafruit has a lovely writeup on how PIRs work; I encourage you to read the deta
 
 The PIR I used has three pins. Here's how you connect it to Tessel:
 
-* +5V on the PIR goes to Vin on Tessel's GPIO bank (this pin is 5V when Tessel is powered over USB)
-* GND goes to any of the various GND pins on Tessel. There's one right next to Vin on the GPIO bank.
-* OUT, the signal pin, goes to any of Tessel's various digital (G) pins. Note that the signal works on a maximum of 3.3V.
-
-![](https://lh3.googleusercontent.com/-Zcmg7NPefAM/U-LafNQe2lI/AAAAAAAAJno/jlCWeBbDWxU/w882-h496-no/20140801_113753.jpg)
+* +5V on the PIR goes to 5V. [Here](https://forums.tessel.io/t/accessing-5v-on-tessel-2-powering-tessel-2-with-wires/2368) is a post on how to access 5V on Tessel 2.
+* GND goes to GND on the Tessel port you are using.
+* OUT, the signal pin, goes to any of Tessel's [various digital pins](https://tessel.gitbooks.io/t2-docs/content/API/Hardware_API.html#pin-mapping). Note that the signal works on a maximum of 3.3V.
 
 I've left the PIR sensor in the retriggering position ([H for the Adafruit one](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/testing-a-pir)), so the signal pin will be pulled high as long as the sensor detects movement.
 
